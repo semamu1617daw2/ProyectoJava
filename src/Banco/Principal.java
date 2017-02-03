@@ -1,6 +1,6 @@
 package Banco;
 
-import com.sun.xml.internal.ws.util.StringUtils;
+
 import java.util.*;
 import java.util.Scanner;
 import java.lang.Object;
@@ -33,23 +33,20 @@ public class Principal {
           Cuenta.clientes.add(usuari2);
           Cuenta.clientes.add(usuari3);
           Cuenta.clientes.add(usuari4);
-          Cuenta c1 =  new Cuenta(generadorIBAN("123456789"),true, 2100,1313,"12345678x" );
+          Cuenta c1 =  new Cuenta(123456789,true, 2100,1313,"12345678x" );
           Cuenta c2 = new Cuenta( 987654321, true, 2100, 1313,"87654321x" );
           Cuenta c3 = new Cuenta( 123123123, true, 2100, 1313, "12312312x");
           Cliente.cuentas.add(c1);
           c1.setIBAN("ES"+2100+1313+43+123456789);
-          c1.tipo="Cuenta Corriente";
           Cliente.cuentas.add(c2);
           c2.setIBAN("ES"+2100+1313+34+987654321);
-          c2.tipo="Cuenta Ahorro";
           Cliente.cuentas.add(c3);
           c3.setIBAN("ES"+2100+1313+57+123123123);
-          c3.tipo="Cuenta Corriente";
           
        do{
           Principal.salida =true;
           Scanner entrada = new Scanner(System.in);
-          System.out.println("\t\t--------Bienvenido al servicio de Banca-------\n "
+          System.out.println("\t\t--------Bienvenido al servicio de la caixa-------\n "
                   + "\nSi no está registrado introduzca la palabra Registro, en caso contrario presione enter."
                   + "\nEscriba Exit para salir.");
           //Prueba de compareTO(Comparator) de cliente
@@ -148,11 +145,8 @@ public class Principal {
             case 0: Principal.salida =false;
             break;
             case 1: System.out.println("CREAR");
-                    Cliente.CrearCuentaCorriente(n);          
+                    Cliente.CrearCuenta(n);          
             break;
-            case 2: System.out.println("CREAR");
-                    Cliente.CrearCuentaAhorro(n);
-            break;           
             case 3: 
                     System.out.println("------Servicio para RETIRAR dinero de una cuenta suya------");
                     Scanner entrada = new Scanner(System.in);
@@ -163,8 +157,7 @@ public class Principal {
                     noexistecuenta=true;
                     
                     for(int z=0;z<Cliente.cuentas.size();z++) {
-                        if(Cliente.cuentas.get(z).getTipo().equals("Cuenta Ahorro")&& Cliente.cuentas.get(z).getNumerocuenta()==Numerocuenta){ cuentaahorro=true;}//si es ahorro mostrara mensaje
-                        if((Cliente.cuentas.get(z).getNIF().equals(nif)) && (Cliente.cuentas.get(z).getNumerocuenta()==Numerocuenta) && Cliente.cuentas.get(z).getTipo()==("Cuenta Corriente")){
+                        if((Cliente.cuentas.get(z).getNIF().equals(nif)) && (Cliente.cuentas.get(z).getNumerocuenta()==Numerocuenta)){
                             noexistecuenta =false;
                             Cliente.cuentas.get(z);//Realizamos método retirar en la cuenta
                             DetallesOperaciones detalles = new DetallesOperaciones(nif,Cliente.cuentas.get(z).getNumerocuenta(),dinero,Cliente.cuentas.get(z).VerSaldo(),"Retirar", Fecha.getFechaActual());
@@ -174,7 +167,6 @@ public class Principal {
                             System.out.println("Su saldo actual es de : "+Cliente.cuentas.get(z).getSaldo());
                             }           
                         }
-                    if(cuentaahorro)System.out.println("No se puede retirar dinero de una Cuenta de Ahorros!!");
                     if(noexistecuenta){ System.out.println("hay problemas con los datos introducidos");}
             break;
             case 4: 

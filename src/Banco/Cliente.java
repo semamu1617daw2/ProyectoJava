@@ -109,9 +109,10 @@ public class Cliente extends Usuario {
     /**
        * Método que crea un objeto de Cuenta Corriente
        * @param uncliente cliente quien crea la cuenta
+       * 
        */
     
-    public static void CrearCuentaCorriente(Cliente uncliente){
+    public static void CrearCuenta(Cliente uncliente){
         
           boolean EstadoCuenta = true;     
           Scanner entrada = new Scanner(System.in);
@@ -131,47 +132,12 @@ public class Cliente extends Usuario {
           
           Cliente.cuentas.add(cuenta1);
           
-          System.out.println("CUENTA CORRIENTE CREADA");
-          
-          cuenta1.tipo="Cuenta Corriente";
+          System.out.println("CUENTA CREADA");
           
           System.out.println(cuenta1);
     }
     
-    /**
-       * Método que crea un objeto de Cuenta Ahorro
-       * @param uncliente cliente quien crea la cuenta
-       */
-    public static void CrearCuentaAhorro(Cliente uncliente){
-        
-        boolean EstadoCuenta = true;
-        Scanner entrada = new Scanner(System.in);
-        int NumeroCuenta = (int) (Math.random()*900000000+100000000);
-          System.out.println("Numero de cuenta generado es : "+ NumeroCuenta+" Guárdelo para futuras operaciones");
-        
-           System.out.println("Codigo de su Oficina? (4 dígitos)");
-                int CodigoOficina = entrada.nextInt();
-                while ( Integer.toString(CodigoOficina).length()!=4){
-                      System.out.println("Tiene que tener 4 dígitos ...Codigo de su Oficina"); 
-                      CodigoOficina = entrada.nextInt();}
-         
-        Cuenta cuenta1 = new Cuenta(NumeroCuenta,EstadoCuenta,entidades.get(0).CodigoEntidad ,CodigoOficina,uncliente.NIF);
-        
-        String DigitoControl = Cuenta.DigitoControl(String.valueOf(CodigoOficina),String.valueOf(entidades.get(0).CodigoEntidad),String.valueOf(NumeroCuenta));
-        cuenta1.setIBAN("ES"+entidades.get(0).CodigoEntidad+CodigoOficina+DigitoControl+NumeroCuenta);
-                      
-        cuenta1.setSaldo((cuenta1.Saldo));
-        
-        Cliente.cuentas.add(cuenta1);
-        
-        System.out.println("CUENTA AHORRO CREADA");
-        
-        cuenta1.tipo="Cuenta Ahorro";
-        
-        System.out.println(cuenta1);
-    }
-/**
- * Método que muestra la información completa de un objeto
+   /** Método que muestra la información completa de un objeto
  * @return NIF del cliente, Nombre del cliente, Apellidos del cliente, Edad del cliente, Teléfono del cliente, Contraseña de acceso
  */
     @Override

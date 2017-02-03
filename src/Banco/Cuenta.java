@@ -2,11 +2,9 @@ package Banco;
 
 import java.util.ArrayList;
 
-/**
- * Clase Abstracta Cuenta
- * Contiene la informacion sobre las cuentas.
- * @author Laura Bujalance Aaron Salvador David Ramirez
- */
+
+
+
 public class Cuenta implements Comparable<Cuenta> {
     /**
      * Iban de la cuenta
@@ -117,22 +115,9 @@ public class Cuenta implements Comparable<Cuenta> {
     public void setSaldo(double Saldo) {
         this.Saldo = Saldo;
     }
-   /**
-    * Método que devuelve el Tipo de la cuenta
-    * @return tipo la cuenta ahorro o corriente
-    */
-    public String getTipo() {
-        return tipo;
-    }
-   /** 
-    * Método que modifica el valor del atributo tipo de la cuenta
-    * @param tipo la cuenta ahorro o corriente
-    */
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    } 
-    /**
-    * Método que permite ingresar dinero a tu cuenta
+    
+    /** 
+     * Método que permite ingresar dinero a tu cuenta
     * @param cantidad el dinero que se quiere ingresar
     */    
     public void Ingresar(double cantidad){
