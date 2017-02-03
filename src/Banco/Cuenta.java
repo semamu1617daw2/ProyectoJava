@@ -1,7 +1,5 @@
 package Banco;
 
-
-
 import java.util.ArrayList;
 
 /**
@@ -9,7 +7,7 @@ import java.util.ArrayList;
  * Contiene la informacion sobre las cuentas.
  * @author Laura Bujalance Aaron Salvador David Ramirez
  */
-public abstract class Cuenta implements ContratoFinanciero,Comparable<Cuenta> {
+public class Cuenta implements Comparable<Cuenta> {
     /**
      * Iban de la cuenta
      */
@@ -202,21 +200,7 @@ public abstract class Cuenta implements ContratoFinanciero,Comparable<Cuenta> {
         }
         return String.valueOf(dg1) + String.valueOf(dg2);
     }
-    
-    /**
-    * Método abstracto que permite retirar dinero de una cuenta
-    * @param cantidad dinero que se quiere retirar de una cuenta
-    */    
-    public abstract void Retirar(double cantidad);
-    /**
-    * {@inheritDoc}
-    *@return Saldo=Saldo-2 devuelvo el Saldo con una tasa de dos euros
-    */ 
-    @Override
-    public double tasas(){
-        System.out.println("Aplicada tasa por valor de 2 euros");
-        return Saldo=Saldo-2;
-    }
+
     /**
     * Método que muestra la información completa de un objeto
     * @return IBAN de la cuenta, Numerocuenta Numero de la Cuenta, Saldo el dinero de la cuenta, Saldo el dinero de la cuenta, NIF el NIF del cliente de la cuenta, CodigoEntidad el codigo de la entidad que pertenece la cuenta, 
@@ -225,6 +209,96 @@ public abstract class Cuenta implements ContratoFinanciero,Comparable<Cuenta> {
     @Override
     public String toString() {
         return "Cuenta{" + "IBAN=" + IBAN + ", Numerocuenta=" + Numerocuenta + ", Saldo=" + Saldo + ", EstadoCuenta=" + EstadoCuenta + ", NIF=" + NIF + ", CodigoEntidad=" + CodigoEntidad + ", CodigoOficina=" + CodigoOficina + ", tipo=" + tipo + '}';
+    }
+    
+    public  String generadorIBAN(String nCuenta){
+       			   
+                 String[] cuenta_banco = nCuenta.split("\\s");
+                           
+                    int[] lacaixa = {8,4,5,7,9,6,2,4};
+                    
+                    int[] nBA = new int[8];
+                    int[] nCC = new int[10];
+                    String NumBA = "";
+                    String NumCC = "";
+                    int[] nBaPesos = {4,8,5,10,9,7,3,6};
+                    int[] nCcPesos = {1,2,4,8,5,10,9,7,3,6};
+                    int nSumaBA=0,nSumaCC=0;
+                    ArrayList<Integer> szN = new ArrayList<>();      
+                    int n,digito1,digito2,r,r2,Rresultado,Rresultado2;
+                    
+                    for(Integer p : lacaixa){
+                    	szN.add(p);
+                    }
+                    
+                    for(String p : cuenta_banco){
+                        int x = Integer.parseInt(p);
+                    	szN.add(x);
+                    }
+                int x=0;  	
+            	for(n = 0; n < 8 ; n++){
+            		nBA[x] = (szN.get(n));
+                        x++;
+            	}
+            
+                 x=0;
+            	for(n = 8; n < 18 ; n++){
+            		nCC[x] = (szN.get(n));
+                    x++;
+            	}
+            	
+            	for(n = 0; n < 8 ; n++){
+            		nSumaBA += nBA[n]*nBaPesos[n];
+            	}
+            	for(n = 0; n < 10 ; n++){
+            		nSumaCC += nCC[n]*nCcPesos[n];
+            	}
+            	//DIGITO BA
+            	r=nSumaBA%11;
+            	Rresultado=11-r;
+            	if (Rresultado<10){
+            		digito1=Rresultado;
+            	}else{	
+            	if (Rresultado==11){
+            		digito1=0;
+            	}else{
+            		digito1=1;
+            		}
+            	}
+            	//DIGITO CC
+            	r2=nSumaCC%11;
+            	Rresultado2=11-r2;
+            	if (Rresultado2<10){
+            		digito2=Rresultado2;
+            	}else{
+            	if (Rresultado2==11){
+            		digito2=0;
+            	}else{
+            		digito2=1;
+            		}
+            	}
+                    
+            	for(n = 0; n < 8 ; n++){
+            		nSumaBA += nBA[n]*nBaPesos[n];
+            		String y = String.valueOf(nBA[n]);
+                        NumBA = NumBA.concat(y);
+            	}
+           
+                    for(n = 0; n < 10 ; n++){
+                       
+            		nSumaCC += nCC[n]*nCcPesos[n];
+            		 String z = String.valueOf(nCC[n]);
+                         NumCC = NumCC.concat(z);
+                            
+            	}
+                    
+                     String d1 = String.valueOf(digito1);
+                     String d2 = String.valueOf(digito2);
+                     String CuentaCorriente = "";
+                     CuentaCorriente = CuentaCorriente.concat("ES21 "+NumBA + " " + d1 + d2 +" " + NumCC); 
+                     
+                     //System.out.println(CuentaCorriente);
+                     return CuentaCorriente;
     }
     
        

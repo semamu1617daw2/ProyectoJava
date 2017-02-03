@@ -2,7 +2,7 @@ package Banco;
  /**
  * @author semamu
  */
-public class Usuario {
+public abstract class Usuario {
     
     public String NIF;
     public String Password;

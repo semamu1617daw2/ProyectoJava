@@ -6,7 +6,7 @@ import java.util.Scanner;
 /**
  * Clase Cliente
  * Contiene la información de los clientes
- * @author Laura Bujalance Aaron Salvador David Ramirez
+ * 
  */
 public class Cliente extends Usuario {
     /**
@@ -40,7 +40,6 @@ public class Cliente extends Usuario {
      * @param Apellidos Apellidos del cliente
      * @param Edad Edad del cliente
      * @param Telefono Teléfono del cliente
-     * @param pass Contraseña de acceso
      */
     public Cliente(String Nombre, String Apellidos, int Edad, int Telefono, String NIF, String Password) {
         super(NIF, Password);
@@ -125,11 +124,9 @@ public class Cliente extends Usuario {
                       System.out.println("Tiene que tener 4 dígitos ...Codigo de su Oficina"); 
                       CodigoOficina = entrada.nextInt();}
           
-          CuentaCorriente cuenta1 = new CuentaCorriente(NumeroCuenta,EstadoCuenta,entidades.get(0).CodigoEntidad ,CodigoOficina,uncliente.NIF);
+          Cuenta cuenta1 = new Cuenta(NumeroCuenta,EstadoCuenta,entidades.get(0).CodigoEntidad ,CodigoOficina,uncliente.NIF);        
           
-          cuenta1.Comision();
-          
-          String DigitoControl = CuentaCorriente.DigitoControl(String.valueOf(CodigoOficina),String.valueOf(entidades.get(0).CodigoEntidad),String.valueOf(NumeroCuenta));
+          String DigitoControl = Cuenta.DigitoControl(String.valueOf(CodigoOficina),String.valueOf(entidades.get(0).CodigoEntidad),String.valueOf(NumeroCuenta));
           cuenta1.setIBAN("ES"+entidades.get(0).CodigoEntidad+CodigoOficina+DigitoControl+NumeroCuenta);
           
           Cliente.cuentas.add(cuenta1);
@@ -158,14 +155,12 @@ public class Cliente extends Usuario {
                       System.out.println("Tiene que tener 4 dígitos ...Codigo de su Oficina"); 
                       CodigoOficina = entrada.nextInt();}
          
-        CuentaAhorro cuenta1 = new CuentaAhorro(NumeroCuenta,EstadoCuenta,entidades.get(0).CodigoEntidad ,CodigoOficina,uncliente.NIF);
+        Cuenta cuenta1 = new Cuenta(NumeroCuenta,EstadoCuenta,entidades.get(0).CodigoEntidad ,CodigoOficina,uncliente.NIF);
         
-        String DigitoControl = CuentaCorriente.DigitoControl(String.valueOf(CodigoOficina),String.valueOf(entidades.get(0).CodigoEntidad),String.valueOf(NumeroCuenta));
+        String DigitoControl = Cuenta.DigitoControl(String.valueOf(CodigoOficina),String.valueOf(entidades.get(0).CodigoEntidad),String.valueOf(NumeroCuenta));
         cuenta1.setIBAN("ES"+entidades.get(0).CodigoEntidad+CodigoOficina+DigitoControl+NumeroCuenta);
-        
-        cuenta1.Comision();
-               
-        cuenta1.setSaldo(cuenta1.Interes(cuenta1.Saldo));
+                      
+        cuenta1.setSaldo((cuenta1.Saldo));
         
         Cliente.cuentas.add(cuenta1);
         

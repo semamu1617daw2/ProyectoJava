@@ -1,11 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-
 <Banco>
-    <Cliente>
-        
-    </Cliente>
-    <Empleado>
-        
-    </Empleado>
+    <Usuario>  
+        <Cliente>
+            <Nombre>Bernat</Nombre>
+            <Apellidos>Montoro</Apellidos>
+            <Edad>20</Edad>
+            <Telefono>111111111</Telefono>
+            <NIF>12345678x</NIF>
+            <Password>123</Password>         
+        </Cliente>
+         <Cliente>
+            <Nombre>Laura</Nombre>
+            <Apellidos>Bujalance</Apellidos>
+            <Edad>28</Edad>
+            <Telefono>222222222</Telefono>
+            <NIF>87654321x</NIF>
+            <Password>456</Password>         
+        </Cliente>
+         <Cliente>
+            <Nombre>Sergio</Nombre>
+            <Apellidos>Martinez</Apellidos>
+            <Edad>19</Edad>
+            <Telefono>333333333</Telefono>
+            <NIF>12312312x</NIF>
+            <Password>789</Password>         
+        </Cliente>
+        <Empleado>
+            <CodiEmpleado>1234</CodiEmpleado>
+            <Username>manolo</Username>
+            <NIF>45645645x</NIF>
+            <Password>456</Password>                 
+        </Empleado>
+    </Usuario>
 </Banco>

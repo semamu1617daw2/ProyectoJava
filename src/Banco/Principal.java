@@ -26,16 +26,16 @@ public class Principal {
 
           EntidadFinanciera Bancolacaixa = new EntidadFinanciera ("lacaixa", "españa",2100);
           Cliente.entidades.add(Bancolacaixa);
-          Cliente usuari2 = new Cliente("Aaron","Savador",20,111111111,"12345678x","123");
+          Cliente usuari2 = new Cliente("Bernat","Montoro",20,111111111,"12345678x","123");
           Cliente usuari3 = new Cliente("Laura","Bujalance",28,222222222,"87654321x","456");
-          Cliente usuari4 = new Cliente("David","Ramírez",19,333333333,"12312312x","789");
+          Cliente usuari4 = new Cliente("Sergio","Martinez",19,333333333,"12312312x","789");
           Empleado empleado1 = new Empleado("1234","manolo","45645645x","456");
           Cuenta.clientes.add(usuari2);
           Cuenta.clientes.add(usuari3);
           Cuenta.clientes.add(usuari4);
-          CuentaCorriente c1 =  new CuentaCorriente( 123456789,true, 2100,1313,"12345678x" );
-          CuentaAhorro c2 = new CuentaAhorro( 987654321, true, 2100, 1313,"87654321x" );
-          CuentaCorriente c3 = new CuentaCorriente( 123123123, true, 2100, 1313, "12312312x");
+          Cuenta c1 =  new Cuenta(generadorIBAN("123456789"),true, 2100,1313,"12345678x" );
+          Cuenta c2 = new Cuenta( 987654321, true, 2100, 1313,"87654321x" );
+          Cuenta c3 = new Cuenta( 123123123, true, 2100, 1313, "12312312x");
           Cliente.cuentas.add(c1);
           c1.setIBAN("ES"+2100+1313+43+123456789);
           c1.tipo="Cuenta Corriente";
@@ -166,8 +166,7 @@ public class Principal {
                         if(Cliente.cuentas.get(z).getTipo().equals("Cuenta Ahorro")&& Cliente.cuentas.get(z).getNumerocuenta()==Numerocuenta){ cuentaahorro=true;}//si es ahorro mostrara mensaje
                         if((Cliente.cuentas.get(z).getNIF().equals(nif)) && (Cliente.cuentas.get(z).getNumerocuenta()==Numerocuenta) && Cliente.cuentas.get(z).getTipo()==("Cuenta Corriente")){
                             noexistecuenta =false;
-                            Cliente.cuentas.get(z).tasas();
-                            Cliente.cuentas.get(z).Retirar(dinero);//Realizamos método retirar en la cuenta
+                            Cliente.cuentas.get(z);//Realizamos método retirar en la cuenta
                             DetallesOperaciones detalles = new DetallesOperaciones(nif,Cliente.cuentas.get(z).getNumerocuenta(),dinero,Cliente.cuentas.get(z).VerSaldo(),"Retirar", Fecha.getFechaActual());
                             //añadimos los detalles de la operación en un array
                             DetallesOperaciones.detalles.add(detalles);
@@ -189,7 +188,6 @@ public class Principal {
                     for(int z=0;z<Cliente.cuentas.size();z++) {
                         if(Cliente.cuentas.get(z).getNIF().equals(nif) && Cliente.cuentas.get(z).getNumerocuenta()==Numerocuenta3){
                             noexistecuenta =false;
-                            Cliente.cuentas.get(z).tasas();
                             Cliente.cuentas.get(z).Ingresar(dinero3);
                             DetallesOperaciones detalles = new DetallesOperaciones(nif,Cliente.cuentas.get(z).getNumerocuenta(),dinero3,Cliente.cuentas.get(z).VerSaldo(),"Ingresar", Fecha.getFechaActual());
                             DetallesOperaciones.detalles.add(detalles);
@@ -246,7 +244,6 @@ public class Principal {
                    if(noexistecuenta2){
                     for(int z=0;z<Cliente.cuentas.size();z++) {
                          if((Cliente.cuentas.get(z).getNIF().equals(nif)) && Cliente.cuentas.get(z).getNumerocuenta()==NumCuenta){
-                             Cliente.cuentas.get(z).tasas();
                              Cliente.cuentas.get(z).Saldo-=tdinero;
                              DetallesOperaciones detalles = new DetallesOperaciones(nif,Cliente.cuentas.get(z).getNumerocuenta(),tdinero,Cliente.cuentas.get(z).VerSaldo(),"Tranferencia cuenta origen", Fecha.getFechaActual());
                              DetallesOperaciones.detalles.add(detalles);
@@ -323,6 +320,10 @@ public class Principal {
     
         }while(salir);
     
+    }
+
+    private static int generadorIBAN(String string) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
